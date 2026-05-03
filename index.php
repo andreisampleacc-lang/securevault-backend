@@ -30,8 +30,8 @@ if (strpos($uri, '/register') !== false && $method === 'POST') {
         $stmt->execute([$username, $password]);
         echo json_encode(['success' => true, 'message' => 'User registered']);
     } catch (Exception $e) {
-        http_response_code(409);
-        echo json_encode(['error' => 'Username already exists']);
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
     }
     exit();
 }
