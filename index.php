@@ -26,7 +26,7 @@ if (strpos($uri, '/register') !== false && $method === 'POST') {
     }
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO sv_users (username, password) VALUES (?, ?)");
         $stmt->execute([$username, $password]);
         echo json_encode(['success' => true, 'message' => 'User registered']);
     } catch (Exception $e) {
@@ -45,7 +45,7 @@ if (strpos($uri, '/login') !== false && $method === 'POST') {
         exit();
     }
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
+    $stmt = $pdo->prepare("SELECT * FROM sv_users WHERE username = ? AND password = ?");
     $stmt->execute([$username, $password]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

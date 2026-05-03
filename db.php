@@ -17,7 +17,7 @@ try {
     die(json_encode(['error' => 'DB connection failed: ' . $e->getMessage()]));
 }
 
-$pdo->exec("CREATE TABLE IF NOT EXISTS users (
+$pdo->exec("CREATE TABLE IF NOT EXISTS sv_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
