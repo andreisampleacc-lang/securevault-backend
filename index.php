@@ -11,10 +11,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require 'db.php';
 
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$uri = $_SERVER['REQUEST_URI'];
+$method = $_SERVER['REQUEST_METHOD'];
 $data = json_decode(file_get_contents('php://input'), true);
 
-if ($path === '/register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if (strpos($uri, '/register') !== false && $method === 'POST') {
     $username = trim($data['username'] ?? '');
     $password = trim($data['password'] ?? '');
 
@@ -34,7 +35,7 @@ if ($path === '/register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-if ($path === '/login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
+if (strpos($uri, '/login') !== false && $method === 'POST') {
     $username = trim($data['username'] ?? '');
     $password = trim($data['password'] ?? '');
 
