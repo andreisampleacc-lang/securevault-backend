@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require 'db.php';
 
-$path = $_SERVER['REQUEST_URI'];
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $data = json_decode(file_get_contents('php://input'), true);
 
 if ($path === '/register' && $_SERVER['REQUEST_METHOD'] === 'POST') {
