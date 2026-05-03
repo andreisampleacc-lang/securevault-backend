@@ -21,6 +21,17 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS sv_users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
+    face_descriptor TEXT,
+    credential_id TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )");
+
+// Add columns if they don't exist yet
+try {
+    $pdo->exec("ALTER TABLE sv_users ADD COLUMN face_descriptor TEXT");
+} catch (Exception $e) {}
+
+try {
+    $pdo->exec("ALTER TABLE sv_users ADD COLUMN credential_id TEXT");
+} catch (Exception $e) {}
 ?>
